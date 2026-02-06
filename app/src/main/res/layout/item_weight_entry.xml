@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Вес и дата в одной строке -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/weightTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="72.5 кг"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#2196F3"/>
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12.12.2023 10:30"
+                android:textSize="14sp"
+                android:textColor="#757575"/>
+
+        </LinearLayout>
+
+        <!-- Контекст замера -->
+        <TextView
+            android:id="@+id/contextTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Утро, до еды"
+            android:textSize="16sp"
+            android:textColor="#424242"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Заметка (если есть) -->
+        <TextView
+            android:id="@+id/noteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Первый замер дня"
+            android:textSize="14sp"
+            android:textColor="#9E9E9E"
+            android:visibility="gone"/>
+
+        <!-- Кнопка удаления -->
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Удалить"
+            android:textSize="12sp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:layout_gravity="end"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
