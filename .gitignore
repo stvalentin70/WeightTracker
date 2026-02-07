@@ -1,15 +1,41 @@
+# 1. Создадим файл с явными CRLF (Windows-окончаниями):
+$gitignoreContent = @'
+# Android Studio для Windows
+*.apk
+*.aar
+*.ap_
+*.aab
+bin/
+gen/
+out/
+build/
+app/build/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.idea/
+.gradle/
 local.properties
+.cxx/
+.externalNativeBuild/
+captures/
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp
+*.temp
+*.class
+*.jar
+*.jks
+*.keystore
+google-services.json
+*-journal
+!.gitignore
+!gradle/wrapper/gradle-wrapper.jar
+!proguard-rules.pro
+'@
+
+# 2. Сохраняем с Windows-окончаниями строк:
+$gitignoreContent -replace "`n", "`r`n" | Out-File -FilePath .gitignore -Encoding UTF8
+
+# 3. Проверим:
+PS C:\Android\WeightTracker> git add .gitignore
+# Теперь предупреждения НЕ должно быть!
