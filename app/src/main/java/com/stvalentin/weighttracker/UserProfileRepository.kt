@@ -7,6 +7,11 @@ class UserProfileRepository(private val userProfileDao: UserProfileDao) {
     // Получаем профиль пользователя как Flow
     val userProfile: Flow<UserProfile?> = userProfileDao.getUserProfile()
     
+    // Получаем профиль синхронно (для проверки)
+    suspend fun getProfileSync(): UserProfile? {
+        return userProfileDao.getProfileSync()
+    }
+    
     // Вставляем новый профиль
     suspend fun insert(profile: UserProfile) {
         userProfileDao.insert(profile)

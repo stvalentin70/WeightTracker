@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserProfileDao {
     
-    @Insert
+    // ИСПРАВЛЕНО: Добавлена стратегия замены
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(profile: UserProfile)
     
     @Update
@@ -17,4 +18,8 @@ interface UserProfileDao {
     
     @Query("DELETE FROM user_profile")
     suspend fun deleteAll()
+    
+    // ДОБАВЛЕНО: Метод для получения профиля без Flow (для отладки)
+    @Query("SELECT * FROM user_profile LIMIT 1")
+    suspend fun getProfileSync(): UserProfile?
 }

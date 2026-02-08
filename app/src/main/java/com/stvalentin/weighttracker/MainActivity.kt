@@ -2,7 +2,6 @@ package com.stvalentin.weighttracker
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     private lateinit var addButton: Button
     private lateinit var historyButton: Button
     private lateinit var chartButton: Button
-    private lateinit var settingsButton: Button
+    private lateinit var profileButton: Button // ИЗМЕНЕНО: settingsButton → profileButton
     
     private lateinit var viewModel: WeightViewModel
     
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         addButton = findViewById(R.id.addButton)
         historyButton = findViewById(R.id.historyButton)
         chartButton = findViewById(R.id.chartButton)
-        settingsButton = findViewById(R.id.settingsButton)
+        profileButton = findViewById(R.id.settingsButton) // ИЗМЕНЕНО
         
         setupClickListeners()
         setupObservers()
@@ -48,24 +47,23 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         }
         
         historyButton.setOnClickListener {
-            // Запускаем HistoryActivity
             val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
         
         chartButton.setOnClickListener {
-            // Запускаем ChartActivity
             val intent = Intent(this, ChartActivity::class.java)
             startActivity(intent)
         }
         
-        settingsButton.setOnClickListener {
-            showSettings()
+        // ИЗМЕНЕНО: Открываем UserProfileActivity вместо showSettings()
+        profileButton.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
         }
     }
     
     private fun setupObservers() {
-        // Наблюдаем за последней записью
         viewModel.latestEntry.observe(this) { entry ->
             if (entry != null) {
                 weightTextView.text = "${entry.weight} кг"
@@ -84,21 +82,16 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     override fun onWeightAdded(entry: WeightEntry) {
         lifecycleScope.launch {
             try {
-                // Сохраняем запись через ViewModel
                 val id = viewModel.addEntry(entry)
-                
-                // Для отладки: проверить количество записей
                 val count = viewModel.getEntriesCount()
                 
-                // Показываем уведомление
                 val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
                 runOnUiThread {
                     Toast.makeText(
                         this@MainActivity,
-                        "Добавлен вес: ${entry.weight} кг\n${sdf.format(entry.dateTime)}\nID: $id\nВсего записей: $count",
+                        "Добавлен вес: ${entry.weight} кг\n${sdf.format(entry.dateTime)}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.d("MainActivity", "Запись добавлена. ID: $id, Всего записей: $count")
                 }
             } catch (e: Exception) {
                 runOnUiThread {
@@ -107,21 +100,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                         "Ошибка при сохранении: ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
-                    Log.e("MainActivity", "Ошибка сохранения", e)
                 }
-            }
-        }
-    }
-    
-    private fun showSettings() {
-        lifecycleScope.launch {
-            val count = viewModel.getEntriesCount()
-            runOnUiThread {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Настройки профиля\nВсего записей в базе: $count",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         }
     }

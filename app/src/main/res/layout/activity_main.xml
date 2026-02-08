@@ -33,7 +33,6 @@
                 android:textColor="#757575"
                 android:layout_marginBottom="8dp"/>
 
-            <!-- Уменьшите размер шрифта если нужно -->
             <TextView
                 android:id="@+id/weightTextView"
                 android:layout_width="wrap_content"
@@ -79,7 +78,6 @@
             android:backgroundTint="#2196F3"
             android:textColor="#FFFFFF"/>
 
-        <!-- ЭТУ КНОПКУ НУЖНО ДОБАВИТЬ -->
         <Button
             android:id="@+id/chartButton"
             android:layout_width="0dp"
@@ -94,11 +92,12 @@
 
     </LinearLayout>
 
+    <!-- ИЗМЕНЕНО: Название кнопки с "Настройки" на "Профиль" -->
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Настройки"
+        android:text="Профиль"
         android:textSize="16sp"
         android:paddingVertical="12dp"
         android:layout_marginBottom="32dp"

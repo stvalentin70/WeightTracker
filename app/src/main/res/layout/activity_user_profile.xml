@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Карточка с полями профиля -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Имя -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Имя:"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Введите ваше имя"
+                    android:textSize="16sp"
+                    android:padding="12dp"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Рост -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Рост (см):"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/heightEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Например: 175"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    android:padding="12dp"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Пол -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Пол:"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="8dp"/>
+
+                <RadioGroup
+                    android:id="@+id/genderRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <RadioButton
+                        android:id="@+id/genderMaleRadio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Мужской"
+                        android:textSize="16sp"/>
+
+                    <RadioButton
+                        android:id="@+id/genderFemaleRadio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Женский"
+                        android:textSize="16sp"/>
+
+                </RadioGroup>
+
+                <!-- Дата рождения -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Дата рождения:"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/birthDateTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="01.01.1990"
+                        android:textSize="16sp"
+                        android:padding="12dp"
+                        android:background="@android:drawable/edit_text"
+                        android:gravity="center_vertical"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/selectDateButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Выбрать"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <!-- Целевой вес -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Целевой вес (кг):"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/targetWeightEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Например: 75.0"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:padding="12dp"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Стартовый вес -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Стартовый вес (кг):"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/startWeightEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Например: 80.0"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:padding="12dp"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Уровень активности -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Уровень активности:"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:layout_marginBottom="4dp"/>
+
+                <Spinner
+                    android:id="@+id/activityLevelSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginBottom="24dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Кнопки действий -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Отмена"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#9E9E9E"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Сохранить"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
