@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Атрибуты для кастомного ProgressBar -->
+    <declare-styleable name="HealthProgressBar">
+        <attr name="progressStartColor" format="color" />
+        <attr name="progressEndColor" format="color" />
+        <attr name="showPercentage" format="boolean" />
+        <attr name="showText" format="boolean" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+    
+    <!-- Атрибуты для кастомной карточки -->
+    <declare-styleable name="HealthCardView">
+        <attr name="cardType" format="enum">
+            <enum name="bmi" value="0" />
+            <enum name="progress" value="1" />
+            <enum name="calories" value="2" />
+            <enum name="weight" value="3" />
+        </attr>
+        <attr name="showIcon" format="boolean" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="iconPadding" format="dimension" />
+    </declare-styleable>
+    
+    <!-- Атрибуты для BMI индикатора -->
+    <declare-styleable name="BMIIndicator">
+        <attr name="bmiValue" format="float" />
+        <attr name="showCategory" format="boolean" />
+        <attr name="showColorIndicator" format="boolean" />
+    </declare-styleable>
+    
+    <!-- Общие атрибуты -->
+    <attr name="cornerRadius" format="dimension" />
+    <attr name="elevation" format="dimension" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="strokeColor" format="color" />
+</resources>

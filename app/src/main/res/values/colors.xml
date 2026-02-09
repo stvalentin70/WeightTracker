@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Основные цвета Material Design -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +8,51 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Цвета для ИМТ (индикаторы состояния здоровья) -->
+    <color name="bmi_severe_thinness">#FF6F00</color>     <!-- Глубокий оранжевый -->
+    <color name="bmi_thinness">#FFA000</color>           <!-- Янтарный -->
+    <color name="bmi_normal">#4CAF50</color>             <!-- Зеленый -->
+    <color name="bmi_overweight">#FF9800</color>         <!-- Оранжевый -->
+    <color name="bmi_obesity_1">#F44336</color>          <!-- Красный -->
+    <color name="bmi_obesity_2">#D32F2F</color>          <!-- Темно-красный -->
+    <color name="bmi_obesity_3">#B71C1C</color>          <!-- Очень темно-красный -->
+    
+    <!-- Цвета прогресса -->
+    <color name="progress_start">#F44336</color>         <!-- Красный -->
+    <color name="progress_middle">#FF9800</color>        <!-- Оранжевый -->
+    <color name="progress_end">#4CAF50</color>           <!-- Зеленый -->
+    
+    <!-- Основные цвета приложения -->
+    <color name="primary_blue">#2196F3</color>
+    <color name="primary_blue_light">#E3F2FD</color>
+    <color name="primary_green">#4CAF50</color>
+    <color name="primary_orange">#FF9800</color>
+    <color name="primary_red">#F44336</color>
+    <color name="primary_gray">#9E9E9E</color>
+    <color name="primary_gray_light">#F5F5F5</color>
+    <color name="primary_gray_dark">#757575</color>
+    <color name="primary_gray_darker">#424242</color>
+    
+    <!-- Акцентные цвета -->
+    <color name="accent_purple">#9C27B0</color>
+    <color name="accent_cyan">#00BCD4</color>
+    <color name="accent_lime">#CDDC39</color>
+    
+    <!-- Цвета текста -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#9E9E9E</color>
+    <color name="text_white">#FFFFFF</color>
+    
+    <!-- Фоновые цвета -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="background_dark">#303030</color>
+    
+    <!-- Цвета состояний -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF9800</color>
+    <color name="error">#F44336</color>
+    <color name="info">#2196F3</color>
 </resources>

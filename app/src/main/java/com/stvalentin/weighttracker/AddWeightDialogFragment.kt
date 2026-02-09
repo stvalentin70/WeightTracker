@@ -79,7 +79,9 @@ class AddWeightDialogFragment : DialogFragment() {
             
             if (weightText.isNotEmpty()) {
                 try {
-                    val weight = weightText.toDouble()
+                    // Заменяем запятые на точки для парсинга
+                    val cleanedWeightText = weightText.replace(',', '.')
+                    val weight = cleanedWeightText.toDouble()
                     if (weight > 0 && weight < 300) { // Валидация разумных значений
                         val weightContext = WeightContext.values()[contextIndex]
                         val newEntry = WeightEntry(
@@ -95,7 +97,7 @@ class AddWeightDialogFragment : DialogFragment() {
                         weightEditText.error = "Введите корректный вес (0-300 кг)"
                     }
                 } catch (e: NumberFormatException) {
-                    weightEditText.error = "Введите число"
+                    weightEditText.error = "Введите число (используйте точку для десятичных)"
                 }
             } else {
                 weightEditText.error = "Введите вес"

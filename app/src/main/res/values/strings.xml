@@ -1,3 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Основное название приложения -->
     <string name="app_name">WeightTracker</string>
+    <string name="app_version">WeightTracker v1.0</string>
+    
+    <!-- Основной экран -->
+    <string name="welcome_message">Добро пожаловать!</string>
+    <string name="current_weight">Текущий вес</string>
+    <string name="add_weight">Добавить вес</string>
+    <string name="view_history">История</string>
+    <string name="view_chart">График</string>
+    <string name="view_profile">Профиль</string>
+    
+    <!-- ИМТ (Индекс массы тела) -->
+    <string name="bmi_title">Индекс массы тела</string>
+    <string name="bmi_placeholder">ИМТ: --</string>
+    <string name="bmi_enter_data">Введите рост и вес в профиле</string>
+    <string name="bmi_enter_weight">Введите текущий вес</string>
+    <string name="bmi_severe_thinness">Выраженный дефицит массы</string>
+    <string name="bmi_thinness">Недостаточный вес</string>
+    <string name="bmi_normal">Нормальный вес</string>
+    <string name="bmi_overweight">Избыточный вес</string>
+    <string name="bmi_obesity_1">Ожирение I степени</string>
+    <string name="bmi_obesity_2">Ожирение II степени</string>
+    <string name="bmi_obesity_3">Ожирение III степени</string>
+    
+    <!-- Прогресс к цели -->
+    <string name="progress_title">Прогресс к цели</string>
+    <string name="progress_placeholder">Прогресс: --</string>
+    <string name="progress_goal_achieved">Цель достигнута! 🎉</string>
+    <string name="progress_no_progress">Нет прогресса</string>
+    
+    <!-- ИСПРАВЛЕНО: Без форматирования -->
+    <string name="progress_kg_left">Осталось: {0} кг</string>
+    <string name="progress_lose_kg_left">Осталось сбросить: {0} кг</string>
+    <string name="progress_gain_kg_left">Осталось набрать: {0} кг</string>
+    <string name="progress_percent_format">Прогресс: {0}%</string>
+    
+    <!-- Суточная норма калорий -->
+    <string name="calories_title">Суточная норма калорий</string>
+    <string name="calories_placeholder">Норма: -- ккал/день</string>
+    
+    <!-- ИСПРАВЛЕНО: Без форматирования -->
+    <string name="calories_format">Норма: {0} ккал/день</string>
+    <string name="calories_based_on_profile">На основе вашего профиля</string>
+    
+    <!-- Диалог добавления веса -->
+    <string name="dialog_add_weight_title">Добавить запись о весе</string>
+    <string name="dialog_weight_hint">Вес (кг)</string>
+    <string name="dialog_weight_example">Например: 72.5</string>
+    <string name="dialog_context_label">Контекст замера</string>
+    <string name="dialog_note_label">Заметка (необязательно)</string>
+    <string name="dialog_note_hint">Дополнительная информация</string>
+    <string name="dialog_date_time_label">Дата и время</string>
+    <string name="dialog_change_date_time">Изменить</string>
+    <string name="dialog_save_button">Сохранить</string>
+    <string name="dialog_cancel_button">Отмена</string>
+    
+    <!-- Валидационные сообщения -->
+    <string name="validation_weight_required">Введите вес</string>
+    <string name="validation_weight_number">Введите число</string>
+    <string name="validation_weight_range">Введите корректный вес (0-300 кг)</string>
+    
+    <!-- История измерений -->
+    <string name="history_title">История измерений</string>
+    <string name="history_empty">История пуста\nДобавьте первую запись на главном экране</string>
+    <string name="history_delete_title">Удаление записи</string>
+    
+    <!-- ИСПРАВЛЕНО: Без форматирования -->
+    <string name="history_delete_message">Удалить запись {0} кг от {1}?</string>
+    <string name="history_delete_button">Удалить</string>
+    <string name="history_cancel_button">Отмена</string>
+    <string name="history_deleted">Запись удалена</string>
+    
+    <!-- График -->
+    <string name="chart_title">График веса</string>
+    <string name="chart_empty">Нет данных для графика</string>
+    <string name="chart_not_enough_data">Недостаточно данных для графика\nНужно минимум 2 записи</string>
+    
+    <!-- Профиль пользователя -->
+    <string name="profile_title">Профиль пользователя</string>
+    <string name="profile_name_label">Имя:</string>
+    <string name="profile_name_hint">Введите ваше имя</string>
+    <string name="profile_height_label">Рост (см):</string>
+    <string name="profile_height_hint">Например: 175</string>
+    <string name="profile_gender_label">Пол:</string>
+    <string name="profile_gender_male">Мужской</string>
+    <string name="profile_gender_female">Женский</string>
+    <string name="profile_birthdate_label">Дата рождения:</string>
+    <string name="profile_birthdate_button">Выбрать</string>
+    <string name="profile_target_weight_label">Целевой вес (кг):</string>
+    <string name="profile_target_weight_hint">Например: 75.0</string>
+    <string name="profile_start_weight_label">Стартовый вес (кг):</string>
+    <string name="profile_start_weight_hint">Например: 80.0</string>
+    <string name="profile_activity_label">Уровень активности:</string>
+    <string name="profile_save_button">Сохранить</string>
+    <string name="profile_cancel_button">Отмена</string>
+    <string name="profile_saved">Профиль сохранен</string>
+    
+    <!-- Валидация профиля -->
+    <string name="validation_height_range">Введите рост от 100 до 250 см</string>
+    <string name="validation_weight_kg_range">Введите вес от 30 до 300 кг</string>
+    
+    <!-- Уровни активности -->
+    <string-array name="activity_levels">
+        <item>Сидячий</item>
+        <item>Легкая активность</item>
+        <item>Умеренная активность</item>
+        <item>Высокая активность</item>
+        <item>Экстремальная активность</item>
+    </string-array>
+    
+    <!-- Контексты замера веса -->
+    <string-array name="weight_contexts">
+        <item>Утро, до еды</item>
+        <item>Утро, после еды</item>
+        <item>Утро, после туалета</item>
+        <item>День, до еды</item>
+        <item>День, после еды</item>
+        <item>День, после туалета</item>
+        <item>Вечер, до еды</item>
+        <item>Вечер, после еды</item>
+        <item>Вечер, после туалета</item>
+        <item>Не важно</item>
+    </string-array>
+    
+    <!-- Сообщения уведомлений -->
+    
+    <!-- ИСПРАВЛЕНО: Без форматирования -->
+    <string name="notification_weight_added">Добавлен вес: {0} кг\n{1}</string>
+    <string name="notification_save_error">Ошибка при сохранении: {0}</string>
+    
+    <!-- Пустые состояния -->
+    <string name="empty_state_no_data">Нет данных</string>
+    <string name="empty_state_loading">Загрузка...</string>
 </resources>

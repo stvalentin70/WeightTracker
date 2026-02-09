@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Заголовок с именем пользователя -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#2196F3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Гость"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Добро пожаловать!"
+                    android:textSize="14sp"
+                    android:textColor="#E3F2FD"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Карточка с текущим весом -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Текущий вес"
+                    android:textSize="16sp"
+                    android:textColor="#757575"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/weightTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- кг"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:textColor="#2196F3"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Карточка с ИМТ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Индекс массы тела"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/bmiTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ИМТ: --"
+                    android:textSize="20sp"
+                    android:textColor="#2196F3"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/bmiCategoryTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Введите рост и вес"
+                    android:textSize="14sp"
+                    android:textColor="#757575"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Карточка с прогрессом -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прогресс к цели"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:progress="0"
+                    android:max="100"
+                    android:progressTint="#4CAF50"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/progressTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прогресс: --"
+                    android:textSize="14sp"
+                    android:textColor="#757575"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Карточка с нормой калорий -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Суточная норма"
+                    android:textSize="16sp"
+                    android:textColor="#424242"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/caloriesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Норма: -- ккал/день"
+                    android:textSize="20sp"
+                    android:textColor="#FF9800"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="На основе вашего профиля"
+                    android:textSize="12sp"
+                    android:textColor="#9E9E9E"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Кнопки действий -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Добавить"
+                android:textSize="14sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/historyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="История"
+                android:textSize="14sp"
+                android:layout_marginHorizontal="4dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/chartButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="График"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="#FF9800"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <!-- Кнопка профиля -->
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Профиль"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#9E9E9E"
+            android:textColor="#FFFFFF"/>
+
+        <!-- Информация -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WeightTracker v1.0"
+            android:textSize="12sp"
+            android:textColor="#888888"/>
+
+    </LinearLayout>
+
+</ScrollView>

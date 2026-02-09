@@ -23,4 +23,6 @@ class Converters {
     fun toWeightContext(value: String?): WeightContext? {
         return value?.let { WeightContext.valueOf(it) }
     }
+    
+    // НЕ НУЖНО добавлять конвертеры для String - Room умеет работать с ними напрямую
 }

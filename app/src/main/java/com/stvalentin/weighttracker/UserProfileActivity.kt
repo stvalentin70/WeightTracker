@@ -147,9 +147,9 @@ class UserProfileActivity : AppCompatActivity() {
         selectedBirthDate = profile.birthDate
         birthDateTextView.text = dateFormatter.format(selectedBirthDate)
         
-        // Веса
-        targetWeightEditText.setText(String.format(Locale.getDefault(), "%.1f", profile.targetWeightKg))
-        startWeightEditText.setText(String.format(Locale.getDefault(), "%.1f", profile.startWeightKg))
+        // Веса - всегда используем точку как разделитель
+        targetWeightEditText.setText(profile.targetWeightKg.toString().replace(',', '.'))
+        startWeightEditText.setText(profile.startWeightKg.toString().replace(',', '.'))
         
         // Уровень активности
         val activityLevelIndex = when (profile.activityLevel) {
@@ -190,8 +190,10 @@ class UserProfileActivity : AppCompatActivity() {
         val name = nameEditText.text.toString().trim()
         val height = heightEditText.text.toString().toIntOrNull() ?: 170
         val gender = if (genderMaleRadio.isChecked) "male" else "female"
-        val targetWeight = targetWeightEditText.text.toString().toDoubleOrNull() ?: 70.0
-        val startWeight = startWeightEditText.text.toString().toDoubleOrNull() ?: 80.0
+        
+        // Парсим вес, заменяя запятые на точки для надежности
+        val targetWeight = parseWeight(targetWeightEditText.text.toString(), 70.0)
+        val startWeight = parseWeight(startWeightEditText.text.toString(), 80.0)
         
         // Преобразуем уровень активности в значение для базы данных
         val activityLevelPosition = activityLevelSpinner.selectedItemPosition
@@ -230,6 +232,15 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
     
+    private fun parseWeight(text: String, defaultValue: Double): Double {
+        return try {
+            // Заменяем запятые на точки и парсим
+            text.replace(',', '.').toDoubleOrNull() ?: defaultValue
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+    
     private fun validateForm(): Boolean {
         var isValid = true
         
@@ -248,9 +259,16 @@ class UserProfileActivity : AppCompatActivity() {
         // Проверка целевого веса
         val targetWeightText = targetWeightEditText.text.toString()
         if (targetWeightText.isNotEmpty()) {
-            val targetWeight = targetWeightText.toDoubleOrNull()
-            if (targetWeight == null || targetWeight < 30 || targetWeight > 300) {
-                targetWeightEditText.error = "Введите вес от 30 до 300 кг"
+            try {
+                // Парсим с заменой запятой на точку
+                val weightText = targetWeightText.replace(',', '.')
+                val targetWeight = weightText.toDoubleOrNull()
+                if (targetWeight == null || targetWeight < 30 || targetWeight > 300) {
+                    targetWeightEditText.error = "Введите вес от 30 до 300 кг"
+                    isValid = false
+                }
+            } catch (e: Exception) {
+                targetWeightEditText.error = "Введите корректный вес (например: 75.5)"
                 isValid = false
             }
         }
@@ -258,9 +276,15 @@ class UserProfileActivity : AppCompatActivity() {
         // Проверка стартового веса
         val startWeightText = startWeightEditText.text.toString()
         if (startWeightText.isNotEmpty()) {
-            val startWeight = startWeightText.toDoubleOrNull()
-            if (startWeight == null || startWeight < 30 || startWeight > 300) {
-                startWeightEditText.error = "Введите вес от 30 до 300 кг"
+            try {
+                val weightText = startWeightText.replace(',', '.')
+                val startWeight = weightText.toDoubleOrNull()
+                if (startWeight == null || startWeight < 30 || startWeight > 300) {
+                    startWeightEditText.error = "Введите вес от 30 до 300 кг"
+                    isValid = false
+                }
+            } catch (e: Exception) {
+                startWeightEditText.error = "Введите корректный вес (например: 80.0)"
                 isValid = false
             }
         }
