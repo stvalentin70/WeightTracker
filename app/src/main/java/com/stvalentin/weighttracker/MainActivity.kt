@@ -1,9 +1,12 @@
 package com.stvalentin.weighttracker
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     private lateinit var historyButton: Button
     private lateinit var chartButton: Button
     private lateinit var profileButton: Button
+    private lateinit var importButton: Button
     
     private lateinit var userNameTextView: TextView
     private lateinit var bmiTextView: TextView
@@ -34,9 +38,16 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     private lateinit var viewModel: WeightViewModel
     private lateinit var userProfileViewModel: UserProfileViewModel
     
+    private var progressDialog: AlertDialog? = null
+    
+    companion object {
+        private const val REQUEST_CODE_IMPORT_CSV = 1001
+        private const val TAG = "MainActivity"
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_enhanced)
+        setContentView(R.layout.activity_main_enhanced)  // Используем enhanced версию
         
         val repository = WeightRepository(WeightDatabase.getDatabase(this).weightDao())
         viewModel = ViewModelProvider(this, WeightViewModel.provideFactory(repository))
@@ -52,8 +63,8 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         setupClickListeners()
         setupObservers()
         
-        // ТЕСТ: раскомментируйте для проверки индикатора
-        // testBmiIndicator()
+        // Убеждаемся, что кнопки имеют правильный текст с эмодзи
+        ensureButtonsHaveEmoji()
     }
     
     private fun initializeViews() {
@@ -62,6 +73,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         historyButton = findViewById(R.id.historyButton)
         chartButton = findViewById(R.id.chartButton)
         profileButton = findViewById(R.id.settingsButton)
+        importButton = findViewById(R.id.importButton)
         
         userNameTextView = findViewById(R.id.userNameTextView)
         bmiTextView = findViewById(R.id.bmiTextView)
@@ -92,18 +104,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
             bmiCategoryTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
             progressTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
             
-            // Кнопки - 12sp с эмодзи
-            addButton.textSize = resources.getDimension(R.dimen.card_small_text_size) / resources.displayMetrics.scaledDensity
-            historyButton.textSize = resources.getDimension(R.dimen.card_small_text_size) / resources.displayMetrics.scaledDensity
-            chartButton.textSize = resources.getDimension(R.dimen.card_small_text_size) / resources.displayMetrics.scaledDensity
-            profileButton.textSize = resources.getDimension(R.dimen.card_small_text_size) / resources.displayMetrics.scaledDensity
-            
-            // Устанавливаем тексты кнопок из строковых ресурсов
-            addButton.text = getString(R.string.add_weight)
-            historyButton.text = getString(R.string.view_history)
-            chartButton.text = getString(R.string.view_chart)
-            profileButton.text = getString(R.string.view_profile)
-            
         } catch (e: Exception) {
             // При ошибке используем значения по умолчанию
             e.printStackTrace()
@@ -115,17 +115,23 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
             userNameTextView.textSize = 18f
             bmiCategoryTextView.textSize = 10f
             progressTextView.textSize = 10f
-            addButton.textSize = 12f
-            historyButton.textSize = 12f
-            chartButton.textSize = 12f
-            profileButton.textSize = 12f
-            
-            // Тексты по умолчанию
-            addButton.text = "➕ Добавить"
-            historyButton.text = "📋 История"
-            chartButton.text = "📈 График"
-            profileButton.text = "👤 Профиль"
         }
+    }
+    
+    private fun ensureButtonsHaveEmoji() {
+        // Явно устанавливаем тексты с эмодзи (на случай, если strings.xml не загрузился)
+        addButton.text = "➕ Добавить"
+        historyButton.text = "📋 История"
+        chartButton.text = "📈 График"
+        profileButton.text = "👤 Профиль"
+        importButton.text = "📥 Импорт/Экспорт"
+        
+        // Устанавливаем размер шрифта для кнопок
+        addButton.textSize = 12f
+        historyButton.textSize = 12f
+        chartButton.textSize = 12f
+        profileButton.textSize = 12f
+        importButton.textSize = 12f
     }
     
     private fun setupClickListeners() {
@@ -146,6 +152,269 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         profileButton.setOnClickListener {
             val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
+        }
+        
+        importButton.setOnClickListener {
+            showImportDialog()
+        }
+    }
+    
+    private fun showImportDialog() {
+        val items = arrayOf("Импорт из CSV", "Экспорт в CSV")
+        
+        AlertDialog.Builder(this)
+            .setTitle("Импорт/Экспорт данных")
+            .setItems(items) { _, which ->
+                when (which) {
+                    0 -> openFilePickerForImport()
+                    1 -> exportToCSV()
+                }
+            }
+            .setNegativeButton("Отмена", null)
+            .show()
+    }
+    
+    private fun openFilePickerForImport() {
+        try {
+            // Пробуем сначала с ACTION_GET_CONTENT
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "*/*"
+                addCategory(Intent.CATEGORY_OPENABLE)
+                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf(
+                    "text/*",
+                    "application/*",
+                    "image/*" // Некоторые файловые менеджеры могут требовать это
+                ))
+                // Разрешаем выбирать любые файлы
+                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
+            }
+            
+            startActivityForResult(Intent.createChooser(intent, "Выберите CSV файл"), REQUEST_CODE_IMPORT_CSV)
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Ошибка при открытии файлового менеджера: ${e.message}")
+            
+            // Альтернативный вариант
+            try {
+                val fallbackIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "*/*"
+                }
+                startActivityForResult(fallbackIntent, REQUEST_CODE_IMPORT_CSV)
+            } catch (e2: Exception) {
+                Toast.makeText(this, "Не удалось открыть файловый менеджер", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Ошибка в fallback: ${e2.message}")
+            }
+        }
+    }
+    
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        if (requestCode == REQUEST_CODE_IMPORT_CSV && resultCode == RESULT_OK) {
+            data?.data?.let { uri ->
+                Log.d(TAG, "Выбран файл: $uri")
+                Log.d(TAG, "Путь файла: ${uri.path}")
+                
+                // Проверяем разрешения
+                try {
+                    contentResolver.takePersistableUriPermission(
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    )
+                } catch (e: Exception) {
+                    Log.w(TAG, "Не удалось получить разрешения для файла: ${e.message}")
+                }
+                
+                importCSVFile(uri)
+            } ?: run {
+                Log.e(TAG, "URI файла равен null")
+                Toast.makeText(this, "Ошибка: не выбран файл", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    
+    private fun importCSVFile(uri: Uri) {
+        Log.d(TAG, "Начинаем импорт файла: $uri")
+        
+        lifecycleScope.launch {
+            try {
+                val inputStream = contentResolver.openInputStream(uri)
+                if (inputStream == null) {
+                    Log.e(TAG, "Не удалось открыть InputStream для файла")
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Ошибка: не удалось прочитать файл",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    return@launch
+                }
+                
+                inputStream.use { stream ->
+                    val fileInfo = CSVImportUtil.getCSVInfo(stream)
+                    Log.d(TAG, "Информация о файле: $fileInfo")
+                    
+                    if (fileInfo.validLines == 0) {
+                        runOnUiThread {
+                            AlertDialog.Builder(this@MainActivity)
+                                .setTitle("Ошибка")
+                                .setMessage("Файл не содержит валидных данных. Проверьте формат файла.")
+                                .setPositiveButton("OK", null)
+                                .show()
+                        }
+                        return@launch
+                    }
+                    
+                    // Показываем диалог подтверждения
+                    runOnUiThread {
+                        AlertDialog.Builder(this@MainActivity)
+                            .setTitle("Подтверждение импорта")
+                            .setMessage("Найдено ${fileInfo.validLines} записей. Импортировать?")
+                            .setPositiveButton("Импортировать") { _, _ ->
+                                startImport(uri)
+                            }
+                            .setNegativeButton("Отмена", null)
+                            .show()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Ошибка чтения файла: ${e.message}", e)
+                runOnUiThread {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Ошибка чтения файла: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+    
+    private fun startImport(uri: Uri) {
+        Log.d(TAG, "Запуск импорта из: $uri")
+        
+        lifecycleScope.launch {
+            showProgressDialog("Импорт данных...")
+            
+            try {
+                val inputStream = contentResolver.openInputStream(uri)
+                if (inputStream == null) {
+                    Log.e(TAG, "Не удалось открыть InputStream для импорта")
+                    runOnUiThread {
+                        hideProgressDialog()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Ошибка: не удалось прочитать файл",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    return@launch
+                }
+                
+                inputStream.use { stream ->
+                    // Получаем репозиторий для импорта
+                    val weightRepository = WeightRepository(WeightDatabase.getDatabase(this@MainActivity).weightDao())
+                    
+                    Log.d(TAG, "Начинаем импорт через CSVImportUtil")
+                    val (successCount, errorCount) = CSVImportUtil.importFromCSV(
+                        this@MainActivity,
+                        stream,
+                        weightRepository
+                    )
+                    
+                    Log.d(TAG, "Импорт завершен: успешно=$successCount, ошибок=$errorCount")
+                    
+                    runOnUiThread {
+                        hideProgressDialog()
+                        
+                        val message = if (successCount > 0) {
+                            "Успешно импортировано: $successCount записей\n" +
+                            (if (errorCount > 0) "Ошибок: $errorCount" else "")
+                        } else {
+                            "Не удалось импортировать данные. Проверьте формат файла."
+                        }
+                        
+                        AlertDialog.Builder(this@MainActivity)
+                            .setTitle(if (successCount > 0) "Импорт завершен" else "Ошибка импорта")
+                            .setMessage(message)
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                                // Обновляем данные
+                                viewModel.allEntries.value?.let {
+                                    // Данные обновятся через LiveData
+                                }
+                            }
+                            .show()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Ошибка импорта: ${e.message}", e)
+                runOnUiThread {
+                    hideProgressDialog()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Ошибка импорта: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+    
+    private fun exportToCSV() {
+        lifecycleScope.launch {
+            val entries = viewModel.allEntries.value ?: emptyList()
+            
+            if (entries.isEmpty()) {
+                runOnUiThread {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Нет данных для экспорта",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return@launch
+            }
+            
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "text/csv"
+                putExtra(Intent.EXTRA_TITLE, "weight_export_${SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())}.csv")
+            }
+            
+            startActivityForResult(intent, REQUEST_CODE_IMPORT_CSV + 1)
+        }
+    }
+    
+    private fun showProgressDialog(message: String) {
+        runOnUiThread {
+            try {
+                val view = layoutInflater.inflate(R.layout.dialog_progress, null)
+                view.findViewById<TextView>(R.id.progressMessage).text = message
+                
+                progressDialog = AlertDialog.Builder(this)
+                    .setView(view)
+                    .setCancelable(false)
+                    .create()
+                
+                progressDialog?.show()
+            } catch (e: Exception) {
+                Log.e(TAG, "Ошибка при показе диалога прогресса: ${e.message}")
+            }
+        }
+    }
+    
+    private fun hideProgressDialog() {
+        runOnUiThread {
+            try {
+                progressDialog?.dismiss()
+            } catch (e: Exception) {
+                Log.e(TAG, "Ошибка при скрытии диалога прогресса: ${e.message}")
+            } finally {
+                progressDialog = null
+            }
         }
     }
     
@@ -285,19 +554,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-    
-    // Тестовая функция для проверки индикатора (раскомментируйте для теста)
-    private fun testBmiIndicator() {
-        // Устанавливаем тестовый ИМТ
-        val testBmi = 25.0 // Нормальный вес
-        
-        bmiTextView.text = String.format(Locale.getDefault(), "%.1f", testBmi)
-        bmiCategoryTextView.text = "Нормальный вес (тест)"
-        bmiCategoryTextView.setTextColor(HealthCalculations.getBMIColor(this, testBmi))
-        
-        // Обновляем шкалу ИМТ
-        updateBMIScale(testBmi)
     }
     
     private fun showAddWeightDialog() {

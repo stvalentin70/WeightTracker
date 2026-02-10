@@ -25,6 +25,9 @@ abstract class WeightDatabase : RoomDatabase() {
         
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
+                // Удаляем старую таблицу, если она существует
+                database.execSQL("DROP TABLE IF EXISTS user_profile")
+                
                 // Создаём таблицу с правильными NOT NULL ограничениями
                 database.execSQL("""
                     CREATE TABLE IF NOT EXISTS user_profile (
@@ -65,6 +68,7 @@ abstract class WeightDatabase : RoomDatabase() {
                     "weight_database"
                 )
                 .addMigrations(MIGRATION_1_2)
+                .fallbackToDestructiveMigration() // Добавляем это для отладки
                 .build()
                 INSTANCE = instance
                 instance

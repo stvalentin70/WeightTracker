@@ -189,4 +189,20 @@
     <string name="october">Октябрь</string>
     <string name="november">Ноябрь</string>
     <string name="december">Декабрь</string>
+    
+    <!-- Импорт/Экспорт данных -->
+    <string name="import_export_title">Импорт/Экспорт данных</string>
+    <string name="import_from_csv">Импорт из CSV</string>
+    <string name="export_to_csv">Экспорт в CSV</string>
+    <string name="import_confirmation_title">Подтверждение импорта</string>
+    <string name="import_confirmation_message">Найдено %1$d записей. Импортировать?</string>
+    <string name="import_button">Импортировать</string>
+    <string name="import_complete_title">Импорт завершен</string>
+    <string name="import_complete_message">Успешно импортировано: %1$d записей\nОшибок: %2$d</string>
+    <string name="import_no_valid_data">Файл не содержит валидных данных</string>
+    <string name="import_reading_error">Ошибка чтения файла: %1$s</string>
+    <string name="import_error">Ошибка импорта: %1$s</string>
+    <string name="export_no_data">Нет данных для экспорта</string>
+    <string name="progress_importing">Импорт данных...</string>
+    <string name="progress_loading">Загрузка...</string>
 </resources>

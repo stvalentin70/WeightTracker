@@ -530,8 +530,19 @@
             android:layout_height="@dimen/button_height_small"
             android:text="@string/view_profile"
             android:textSize="@dimen/card_small_text_size"
-            android:layout_marginBottom="@dimen/spacing_xlarge"
+            android:layout_marginBottom="@dimen/spacing_large"
             android:backgroundTint="@color/primary_gray"
+            android:textColor="@color/text_white"/>
+
+        <!-- Кнопка импорта/экспорта -->
+        <Button
+            android:id="@+id/importButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_small"
+            android:text="📥 Импорт/Экспорт"
+            android:textSize="@dimen/card_small_text_size"
+            android:layout_marginBottom="@dimen/spacing_xlarge"
+            android:backgroundTint="@color/primary_purple"
             android:textColor="@color/text_white"/>
 
         <!-- Версия приложения -->

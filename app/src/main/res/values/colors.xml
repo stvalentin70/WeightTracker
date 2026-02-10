@@ -39,6 +39,7 @@
     <color name="primary_orange">#FF9800</color>
     <color name="primary_red">#F44336</color>
     <color name="primary_gray">#9E9E9E</color>
+    <color name="primary_purple">#9C27B0</color> <!-- ДОБАВЛЕНО для кнопки импорта -->
     <color name="primary_gray_light">#F5F5F5</color>
     <color name="primary_gray_dark">#757575</color>
     <color name="primary_gray_darker">#424242</color>
