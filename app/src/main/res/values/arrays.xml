@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Уровни активности -->
+    <string-array name="activity_levels">
+        <item>Сидячий</item>
+        <item>Легкая активность</item>
+        <item>Умеренная активность</item>
+        <item>Высокая активность</item>
+        <item>Экстремальная активность</item>
+    </string-array>
+    
+    <!-- Контексты замера веса -->
+    <string-array name="weight_contexts">
+        <item>Утро, до еды</item>
+        <item>Утро, после еды</item>
+        <item>Утро, после туалета</item>
+        <item>День, до еды</item>
+        <item>День, после еды</item>
+        <item>День, после туалета</item>
+        <item>Вечер, до еды</item>
+        <item>Вечер, после еды</item>
+        <item>Вечер, после туалета</item>
+        <item>Не важно</item>
+    </string-array>
+    
+    <!-- Периоды для графика -->
+    <string-array name="chart_periods">
+        <item>Все записи</item>
+        <item>Последние 7 дней</item>
+        <item>Последние 30 дней</item>
+        <item>Последние 90 дней</item>
+    </string-array>
+    
+    <!-- Русские названия месяцев -->
+    <string-array name="months_ru">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </string-array>
+    
+    <!-- Русские дни недели -->
+    <string-array name="weekdays_ru">
+        <item>Воскресенье</item>
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+    </string-array>
+    
+    <!-- Сокращенные дни недели -->
+    <string-array name="weekdays_short_ru">
+        <item>Вс</item>
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+    </string-array>
+</resources>

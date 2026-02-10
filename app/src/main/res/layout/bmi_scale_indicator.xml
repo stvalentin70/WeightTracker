@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium">
+
+    <!-- Заголовок шкалы ИМТ -->
+    <TextView
+        android:id="@+id/bmiScaleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Шкала ИМТ"
+        android:textSize="@dimen/card_title_text_size"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/spacing_medium" />
+
+    <!-- Контейнер для шкалы ИМТ -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small">
+
+        <!-- Фон шкалы -->
+        <LinearLayout
+            android:id="@+id/bmiScaleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bmi_scale_height"
+            android:orientation="horizontal"
+            android:background="@color/scale_background"
+            android:weightSum="100">
+
+            <!-- Сегмент 1: <16 (выраженный дефицит) -->
+            <View
+                android:id="@+id/bmiSegment1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/bmi_scale_severe"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 2: 16-18.5 (недостаточный вес) -->
+            <View
+                android:id="@+id/bmiSegment2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7.5"
+                android:background="@color/bmi_scale_thin"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 3: 18.5-25 (нормальный вес) -->
+            <View
+                android:id="@+id/bmiSegment3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:background="@color/bmi_scale_normal"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 4: 25-30 (избыточный вес) -->
+            <View
+                android:id="@+id/bmiSegment4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/bmi_scale_overweight"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 5: 30-35 (ожирение I) -->
+            <View
+                android:id="@+id/bmiSegment5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/bmi_scale_obesity1"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 6: 35-40 (ожирение II) -->
+            <View
+                android:id="@+id/bmiSegment6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/bmi_scale_obesity2"
+                android:layout_marginEnd="1dp" />
+
+            <!-- Сегмент 7: >40 (ожирение III) -->
+            <View
+                android:id="@+id/bmiSegment7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="22.5"
+                android:background="@color/bmi_scale_obesity3" />
+
+        </LinearLayout>
+
+        <!-- Индикатор текущего значения ИМТ -->
+        <View
+            android:id="@+id/bmiIndicator"
+            android:layout_width="@dimen/bmi_indicator_width"
+            android:layout_height="@dimen/bmi_indicator_height"
+            android:background="@color/indicator_current"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <!-- Подписи значений на шкале -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_xsmall">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="16"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="start" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="18.5"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="25"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="30"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="35"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="40"
+            android:textSize="@dimen/bmi_label_text_size"
+            android:textColor="@color/text_secondary"
+            android:gravity="end" />
+
+    </LinearLayout>
+
+    <!-- Легенда шкалы -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Норма: 18.5-25"
+        android:textSize="@dimen/card_small_text_size"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/spacing_small" />
+
+</LinearLayout>

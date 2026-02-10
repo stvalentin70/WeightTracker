@@ -22,7 +22,7 @@
     
     <!-- Размеры кнопок -->
     <dimen name="button_height">48dp</dimen>
-    <dimen name="button_height_small">36dp</dimen>
+    <dimen name="button_height_small">40dp</dimen>
     <dimen name="button_height_large">56dp</dimen>
     <dimen name="button_padding_horizontal">16dp</dimen>
     <dimen name="button_padding_vertical">12dp</dimen>
@@ -69,15 +69,30 @@
     <dimen name="elevation_high">8dp</dimen>
     <dimen name="elevation_xhigh">16dp</dimen>
     
-    <!-- Размеры текста для Этапа 4.1 -->
-    <dimen name="text_size_xsmall">10sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_medium">14sp</dimen>
-    <dimen name="text_size_large">16sp</dimen>
-    <dimen name="text_size_xlarge">18sp</dimen>
-    <dimen name="text_size_xxlarge">20sp</dimen>
+    <!-- Размеры текста (ОПТИМИЗИРОВАНЫ для читаемости) -->
+    <dimen name="text_size_xsmall">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_xxlarge">22sp</dimen>
     <dimen name="text_size_xxxlarge">24sp</dimen>
-    <dimen name="text_size_display">36sp</dimen>
+    <dimen name="text_size_display">32sp</dimen>
+    
+    <!-- Специальные размеры для карточек на главном экране (ИСПРАВЛЕНЫ) -->
+    <dimen name="card_title_text_size">16sp</dimen> <!-- Заголовки карточек -->
+    <dimen name="card_value_text_size">22sp</dimen> <!-- Основные значения -->
+    <dimen name="card_detail_text_size">10sp</dimen> <!-- ИЗМЕНЕНО: было 14sp -->
+    <dimen name="card_small_text_size">12sp</dimen> <!-- Кнопки и мелкий текст -->
+    <dimen name="card_subtitle_text_size">16sp</dimen>
+    
+    <!-- Размеры для шкалы ИМТ -->
+    <dimen name="bmi_scale_height">20dp</dimen>
+    <dimen name="bmi_scale_corner_radius">4dp</dimen>
+    <dimen name="bmi_indicator_width">3dp</dimen>
+    <dimen name="bmi_indicator_height">24dp</dimen>
+    <dimen name="bmi_label_text_size">10sp</dimen>
+    <dimen name="bmi_legend_text_size">12sp</dimen> <!-- ИЗМЕНЕНО: было 9sp -->
     
     <!-- Отступы между элементами -->
     <dimen name="spacing_xsmall">4dp</dimen>
@@ -95,4 +110,37 @@
     <!-- Минимальная высота секций -->
     <dimen name="section_min_height">56dp</dimen>
     <dimen name="card_min_height">80dp</dimen>
+    
+    <!-- Размеры для графика -->
+    <dimen name="chart_padding">80dp</dimen>
+    <dimen name="chart_axis_text_size">14sp</dimen>
+    <dimen name="chart_label_text_size">16sp</dimen>
+    <dimen name="chart_point_label_text_size">12sp</dimen>
+    
+    <!-- Размеры для спиннера -->
+    <dimen name="spinner_padding">12dp</dimen>
+    <dimen name="spinner_text_size">16sp</dimen>
+    
+    <!-- Размеры для попапа -->
+    <dimen name="popup_width">240dp</dimen>
+    <dimen name="popup_padding">16dp</dimen>
+    <dimen name="popup_corner_radius">12dp</dimen>
+    <dimen name="popup_elevation">8dp</dimen>
+    
+    <!-- Размеры для карточек графика -->
+    <dimen name="chart_card_corner_radius">12dp</dimen>
+    <dimen name="chart_card_elevation">4dp</dimen>
+    <dimen name="chart_card_padding">16dp</dimen>
+    
+    <!-- Размеры иконок для графика -->
+    <dimen name="chart_icon_size">24dp</dimen>
+    <dimen name="chart_empty_icon_size">80dp</dimen>
+    
+    <!-- Размеры текста в статистике -->
+    <dimen name="chart_stats_text_size">16sp</dimen>
+    <dimen name="chart_empty_text_size">18sp</dimen>
+    
+    <!-- Отступы в карточке управления -->
+    <dimen name="control_card_padding">16dp</dimen>
+    <dimen name="control_spacing">8dp</dimen>
 </resources>

@@ -10,18 +10,27 @@
     <color name="white">#FFFFFFFF</color>
     
     <!-- Цвета для ИМТ (индикаторы состояния здоровья) -->
-    <color name="bmi_severe_thinness">#FF6F00</color>     <!-- Глубокий оранжевый -->
-    <color name="bmi_thinness">#FFA000</color>           <!-- Янтарный -->
-    <color name="bmi_normal">#4CAF50</color>             <!-- Зеленый -->
-    <color name="bmi_overweight">#FF9800</color>         <!-- Оранжевый -->
-    <color name="bmi_obesity_1">#F44336</color>          <!-- Красный -->
-    <color name="bmi_obesity_2">#D32F2F</color>          <!-- Темно-красный -->
-    <color name="bmi_obesity_3">#B71C1C</color>          <!-- Очень темно-красный -->
+    <color name="bmi_severe_thinness">#FF6F00</color>
+    <color name="bmi_thinness">#FFA000</color>
+    <color name="bmi_normal">#4CAF50</color>
+    <color name="bmi_overweight">#FF9800</color>
+    <color name="bmi_obesity_1">#F44336</color>
+    <color name="bmi_obesity_2">#D32F2F</color>
+    <color name="bmi_obesity_3">#B71C1C</color>
+    
+    <!-- Цвета для шкалы ИМТ -->
+    <color name="bmi_scale_severe">#FF5722</color>
+    <color name="bmi_scale_thin">#FF9800</color>
+    <color name="bmi_scale_normal">#4CAF50</color>
+    <color name="bmi_scale_overweight">#FFC107</color>
+    <color name="bmi_scale_obesity1">#FF9800</color>
+    <color name="bmi_scale_obesity2">#F44336</color>
+    <color name="bmi_scale_obesity3">#D32F2F</color>
     
     <!-- Цвета прогресса -->
-    <color name="progress_start">#F44336</color>         <!-- Красный -->
-    <color name="progress_middle">#FF9800</color>        <!-- Оранжевый -->
-    <color name="progress_end">#4CAF50</color>           <!-- Зеленый -->
+    <color name="progress_start">#F44336</color>
+    <color name="progress_middle">#FF9800</color>
+    <color name="progress_end">#4CAF50</color>
     
     <!-- Основные цвета приложения -->
     <color name="primary_blue">#2196F3</color>
@@ -55,4 +64,16 @@
     <color name="warning">#FF9800</color>
     <color name="error">#F44336</color>
     <color name="info">#2196F3</color>
+    
+    <!-- Цвета для индикаторов -->
+    <color name="indicator_current">#F44336</color>
+    <color name="indicator_line">#9E9E9E</color>
+    <color name="scale_background">#EEEEEE</color>
+    
+    <!-- Цвета градиента шкалы ИМТ -->
+    <color name="bmi_gradient_start">#FF5722</color>
+    <color name="bmi_gradient_mid1">#FF9800</color>
+    <color name="bmi_gradient_mid2">#4CAF50</color>
+    <color name="bmi_gradient_mid3">#FFC107</color>
+    <color name="bmi_gradient_end">#F44336</color>
 </resources>

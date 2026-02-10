@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Основное название приложения -->
     <string name="app_name">WeightTracker</string>
     <string name="app_version">WeightTracker v1.0</string>
     
-    <!-- Основной экран -->
     <string name="welcome_message">Добро пожаловать!</string>
     <string name="current_weight">Текущий вес</string>
-    <string name="add_weight">Добавить вес</string>
-    <string name="view_history">История</string>
-    <string name="view_chart">График</string>
-    <string name="view_profile">Профиль</string>
     
-    <!-- ИМТ (Индекс массы тела) -->
-    <string name="bmi_title">Индекс массы тела</string>
-    <string name="bmi_placeholder">ИМТ: --</string>
-    <string name="bmi_enter_data">Введите рост и вес в профиле</string>
-    <string name="bmi_enter_weight">Введите текущий вес</string>
-    <string name="bmi_severe_thinness">Выраженный дефицит массы</string>
-    <string name="bmi_thinness">Недостаточный вес</string>
+    <!-- Обновленные строки для кнопок с иконками -->
+    <string name="add_weight">➕ Добавить</string>
+    <string name="view_history">📋 История</string>
+    <string name="view_chart">📈 График</string>
+    <string name="view_profile">👤 Профиль</string>
+    
+    <!-- ИМТ -->
+    <string name="bmi_title">ИМТ</string>
+    <string name="bmi_scale_title">Шкала ИМТ</string>
+    <string name="bmi_normal_range">Норма: 18.5-25</string>
+    <string name="bmi_placeholder">--</string>
+    <string name="bmi_enter_data">Введите рост и вес</string>
+    <string name="bmi_enter_weight">Добавьте вес</string>
+    <string name="bmi_severe_thinness">Выраженный дефицит</string>
+    <string name="bmi_thinness">Дефицит веса</string>
     <string name="bmi_normal">Нормальный вес</string>
     <string name="bmi_overweight">Избыточный вес</string>
-    <string name="bmi_obesity_1">Ожирение I степени</string>
-    <string name="bmi_obesity_2">Ожирение II степени</string>
-    <string name="bmi_obesity_3">Ожирение III степени</string>
+    <string name="bmi_obesity_1">Ожирение I</string>
+    <string name="bmi_obesity_2">Ожирение II</string>
+    <string name="bmi_obesity_3">Ожирение III</string>
     
     <!-- Прогресс к цели -->
-    <string name="progress_title">Прогресс к цели</string>
-    <string name="progress_placeholder">Прогресс: --</string>
+    <string name="progress_title">Прогресс</string>
+    <string name="progress_placeholder">--</string>
     <string name="progress_goal_achieved">Цель достигнута! 🎉</string>
     <string name="progress_no_progress">Нет прогресса</string>
+    <string name="progress_set_goal">Установите цель</string>
     
-    <!-- ИСПРАВЛЕНО: Без форматирования -->
-    <string name="progress_kg_left">Осталось: {0} кг</string>
-    <string name="progress_lose_kg_left">Осталось сбросить: {0} кг</string>
-    <string name="progress_gain_kg_left">Осталось набрать: {0} кг</string>
-    <string name="progress_percent_format">Прогресс: {0}%</string>
+    <string name="progress_kg_left">Осталось: %1$.1f кг</string>
+    <string name="progress_lose_kg_left">сбросить: %1$.1f кг</string>
+    <string name="progress_gain_kg_left">набрать: %1$.1f кг</string>
+    <string name="progress_percent_format">%1$d%%</string>
     
     <!-- Суточная норма калорий -->
-    <string name="calories_title">Суточная норма калорий</string>
-    <string name="calories_placeholder">Норма: -- ккал/день</string>
+    <string name="calories_title">Калории</string>
+    <string name="calories_placeholder">--</string>
     
-    <!-- ИСПРАВЛЕНО: Без форматирования -->
-    <string name="calories_format">Норма: {0} ккал/день</string>
-    <string name="calories_based_on_profile">На основе вашего профиля</string>
+    <string name="calories_format">%1$d</string>
+    <string name="calories_based_on_profile">На основе профиля</string>
     
     <!-- Диалог добавления веса -->
     <string name="dialog_add_weight_title">Добавить запись о весе</string>
@@ -67,8 +68,7 @@
     <string name="history_empty">История пуста\nДобавьте первую запись на главном экране</string>
     <string name="history_delete_title">Удаление записи</string>
     
-    <!-- ИСПРАВЛЕНО: Без форматирования -->
-    <string name="history_delete_message">Удалить запись {0} кг от {1}?</string>
+    <string name="history_delete_message">Удалить запись %1$.1f кг от %2$s?</string>
     <string name="history_delete_button">Удалить</string>
     <string name="history_cancel_button">Отмена</string>
     <string name="history_deleted">Запись удалена</string>
@@ -77,6 +77,17 @@
     <string name="chart_title">График веса</string>
     <string name="chart_empty">Нет данных для графика</string>
     <string name="chart_not_enough_data">Недостаточно данных для графика\nНужно минимум 2 записи</string>
+    <string name="chart_period_label">Период:</string>
+    <string name="chart_tap_point_info">Нажмите на точку графика для подробной информации</string>
+    <string name="chart_hint_tap_point">Нажмите на любую точку на графике, чтобы увидеть детали</string>
+    <string name="chart_hint_loading">Загрузка данных...</string>
+    <string name="chart_stats_title">Статистика</string>
+    <string name="chart_stats_average">Средний вес: %1$.1f кг</string>
+    <string name="chart_stats_min">Мин: %1$.1f кг</string>
+    <string name="chart_stats_max">Макс: %1$.1f кг</string>
+    <string name="chart_stats_count">Записей: %1$d</string>
+    <string name="chart_stats_period">Период: %1$s</string>
+    <string name="chart_stats_date_range">с %1$s по %2$s</string>
     
     <!-- Профиль пользователя -->
     <string name="profile_title">Профиль пользователя</string>
@@ -102,36 +113,80 @@
     <string name="validation_height_range">Введите рост от 100 до 250 см</string>
     <string name="validation_weight_kg_range">Введите вес от 30 до 300 кг</string>
     
-    <!-- Уровни активности -->
-    <string-array name="activity_levels">
-        <item>Сидячий</item>
-        <item>Легкая активность</item>
-        <item>Умеренная активность</item>
-        <item>Высокая активность</item>
-        <item>Экстремальная активность</item>
-    </string-array>
-    
-    <!-- Контексты замера веса -->
-    <string-array name="weight_contexts">
-        <item>Утро, до еды</item>
-        <item>Утро, после еды</item>
-        <item>Утро, после туалета</item>
-        <item>День, до еды</item>
-        <item>День, после еды</item>
-        <item>День, после туалета</item>
-        <item>Вечер, до еды</item>
-        <item>Вечер, после еды</item>
-        <item>Вечер, после туалета</item>
-        <item>Не важно</item>
-    </string-array>
-    
     <!-- Сообщения уведомлений -->
-    
-    <!-- ИСПРАВЛЕНО: Без форматирования -->
-    <string name="notification_weight_added">Добавлен вес: {0} кг\n{1}</string>
-    <string name="notification_save_error">Ошибка при сохранении: {0}</string>
+    <string name="notification_weight_added">Добавлен вес: %1$.1f кг\n%2$s</string>
+    <string name="notification_save_error">Ошибка при сохранении: %1$s</string>
     
     <!-- Пустые состояния -->
     <string name="empty_state_no_data">Нет данных</string>
     <string name="empty_state_loading">Загрузка...</string>
+    <string name="empty_state_title">Нет данных</string>
+    <string name="empty_state_add_first_record">Добавьте первую запись на главном экране</string>
+    <string name="empty_state_no_data_for_period">Нет данных для выбранного периода</string>
+    
+    <!-- Периоды графика -->
+    <string name="period_all">Все записи</string>
+    <string name="period_7_days">Последние 7 дней</string>
+    <string name="period_30_days">Последние 30 дней</string>
+    <string name="period_90_days">Последние 90 дней</string>
+    
+    <!-- Форматы дат -->
+    <string name="date_format_full">dd MMMM yyyy</string>
+    <string name="date_format_short">dd.MM.yyyy</string>
+    <string name="time_format">HH:mm</string>
+    <string name="datetime_format">dd.MM.yyyy HH:mm</string>
+    
+    <!-- Единицы измерения -->
+    <string name="unit_kg">кг</string>
+    <string name="unit_kcal">ккал</string>
+    <string name="unit_cm">см</string>
+    
+    <!-- Сообщения в попапе -->
+    <string name="popup_weight">Вес: %1$.1f кг</string>
+    <string name="popup_date">%1$s (%2$s)</string>
+    <string name="popup_note">Заметка: %1$s</string>
+    <string name="popup_context">Контекст: %1$s</string>
+    
+    <!-- Кнопки и действия -->
+    <string name="button_back">Назад</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="button_delete">Удалить</string>
+    <string name="button_edit">Редактировать</string>
+    <string name="button_add">Добавить</string>
+    <string name="button_view">Просмотр</string>
+    
+    <!-- Сообщения об ошибках -->
+    <string name="error_network">Ошибка сети. Проверьте подключение к интернету</string>
+    <string name="error_database">Ошибка базы данных</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_no_data">Нет данных для отображения</string>
+    
+    <!-- Успешные сообщения -->
+    <string name="success_saved">Сохранено успешно</string>
+    <string name="success_deleted">Удалено успешно</string>
+    <string name="success_updated">Обновлено успешно</string>
+    
+    <!-- Названия дней недели -->
+    <string name="sunday">Воскресенье</string>
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Четверг</string>
+    <string name="friday">Пятница</string>
+    <string name="saturday">Суббота</string>
+    
+    <!-- Названия месяцев -->
+    <string name="january">Январь</string>
+    <string name="february">Февраль</string>
+    <string name="march">Март</string>
+    <string name="april">Апрель</string>
+    <string name="may">Май</string>
+    <string name="june">Июнь</string>
+    <string name="july">Июль</string>
+    <string name="august">Август</string>
+    <string name="september">Сентябрь</string>
+    <string name="october">Октябрь</string>
+    <string name="november">Ноябрь</string>
+    <string name="december">Декабрь</string>
 </resources>

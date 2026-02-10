@@ -33,6 +33,8 @@ class SimpleLineChartView @JvmOverloads constructor(
     private var maxValue: Float = 100f
     private var padding: Float = 80f
     
+    private val pointPositions = mutableListOf<PointF>()
+    
     // Форматтеры дат
     private val dateFormatter = SimpleDateFormat("dd.MM", Locale.getDefault())
     private val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
@@ -89,6 +91,8 @@ class SimpleLineChartView @JvmOverloads constructor(
         
         dataPoints.clear()
         dates.clear()
+        pointPositions.clear()
+        
         dataPoints.addAll(weights)
         dates.addAll(entryDates)
         
@@ -121,6 +125,38 @@ class SimpleLineChartView @JvmOverloads constructor(
         
         Log.d(TAG, "Invalidating view...")
         invalidate()
+    }
+    
+    fun getDataPoints(): List<PointF> {
+        return pointPositions.toList()
+    }
+    
+    fun getDataAtPosition(position: Int): Pair<Float, Date>? {
+        return if (position in dataPoints.indices && position in dates.indices) {
+            Pair(dataPoints[position], dates[position])
+        } else {
+            null
+        }
+    }
+    
+    fun findNearestPoint(x: Float, y: Float): Int? {
+        if (pointPositions.isEmpty()) return null
+        
+        var nearestIndex: Int? = null
+        var minDistance = Float.MAX_VALUE
+        
+        pointPositions.forEachIndexed { index, point ->
+            val distance = kotlin.math.sqrt(
+                (point.x - x) * (point.x - x) + (point.y - y) * (point.y - y)
+            )
+            
+            if (distance < minDistance && distance < 100f) {
+                minDistance = distance
+                nearestIndex = index
+            }
+        }
+        
+        return nearestIndex
     }
     
     override fun onDraw(canvas: Canvas) {
@@ -178,33 +214,35 @@ class SimpleLineChartView @JvmOverloads constructor(
         // Рисуем ось X (даты)
         drawXAxis(canvas, chartWidth, chartHeight)
         
+        // Очищаем список позиций точек
+        pointPositions.clear()
+        
         // Рассчитываем точки
-        val points = mutableListOf<PointF>()
         for (i in dataPoints.indices) {
             val x = padding + (i * chartWidth / (dataPoints.size - 1))
             val normalizedY = (dataPoints[i] - minValue) / valueRange
             val y = padding + chartHeight - (normalizedY * chartHeight)
-            points.add(PointF(x, y))
+            pointPositions.add(PointF(x, y))
             
             Log.d(TAG, "Point $i: weight=${dataPoints[i]}, x=$x, y=$y, normalizedY=$normalizedY")
         }
         
         // Рисуем линию
-        if (points.size >= 2) {
-            Log.d(TAG, "Drawing line connecting ${points.size} points")
-            for (i in 0 until points.size - 1) {
+        if (pointPositions.size >= 2) {
+            Log.d(TAG, "Drawing line connecting ${pointPositions.size} points")
+            for (i in 0 until pointPositions.size - 1) {
                 canvas.drawLine(
-                    points[i].x,
-                    points[i].y,
-                    points[i + 1].x,
-                    points[i + 1].y,
+                    pointPositions[i].x,
+                    pointPositions[i].y,
+                    pointPositions[i + 1].x,
+                    pointPositions[i + 1].y,
                     paint
                 )
             }
         }
         
         // Рисуем точки
-        points.forEachIndexed { index, point ->
+        pointPositions.forEachIndexed { index, point ->
             Log.d(TAG, "Drawing point at (${point.x}, ${point.y})")
             // Большая внешняя точка
             canvas.drawCircle(point.x, point.y, 12f, pointPaint)

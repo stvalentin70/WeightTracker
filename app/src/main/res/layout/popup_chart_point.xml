@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/popup_background"
+        android:padding="@dimen/popup_padding"
+        android:minWidth="200dp">
+
+        <!-- Заголовок -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_medium">
+
+            <ImageView
+                android:layout_width="@dimen/chart_icon_size"
+                android:layout_height="@dimen/chart_icon_size"
+                android:src="@drawable/ic_calendar"
+                android:tint="@color/primary_blue"
+                android:layout_marginEnd="@dimen/padding_medium"/>
+
+            <TextView
+                android:id="@+id/popupDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дата"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
+
+        </LinearLayout>
+
+        <!-- Вес -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_medium">
+
+            <ImageView
+                android:layout_width="@dimen/chart_icon_size"
+                android:layout_height="@dimen/chart_icon_size"
+                android:src="@drawable/ic_weight"
+                android:tint="@color/primary_blue"
+                android:layout_marginEnd="@dimen/padding_medium"/>
+
+            <TextView
+                android:id="@+id/popupWeightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Вес"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textStyle="bold"
+                android:textColor="@color/primary_blue"/>
+
+        </LinearLayout>
+
+        <!-- Контекст -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_medium">
+
+            <ImageView
+                android:layout_width="@dimen/chart_icon_size"
+                android:layout_height="@dimen/chart_icon_size"
+                android:src="@drawable/ic_context"
+                android:tint="@color/primary_gray_dark"
+                android:layout_marginEnd="@dimen/padding_medium"/>
+
+            <TextView
+                android:id="@+id/popupContextText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Контекст"
+                android:textSize="@dimen/text_size_medium"
+                android:textColor="@color/text_secondary"/>
+
+        </LinearLayout>
+
+        <!-- Заметка (если есть) -->
+        <LinearLayout
+            android:id="@+id/noteContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/chart_icon_size"
+                android:layout_height="@dimen/chart_icon_size"
+                android:src="@drawable/ic_note"
+                android:tint="@color/primary_gray_dark"
+                android:layout_marginEnd="@dimen/padding_medium"/>
+
+            <TextView
+                android:id="@+id/popupNoteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Заметка"
+                android:textSize="@dimen/text_size_medium"
+                android:textColor="@color/text_secondary"
+                android:maxWidth="200dp"
+                android:ellipsize="end"
+                android:maxLines="3"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
