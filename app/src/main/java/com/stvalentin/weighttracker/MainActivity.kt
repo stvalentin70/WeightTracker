@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         initializeViews()
         setupClickListeners()
         setupObservers()
+        
+        // ТЕСТ: раскомментируйте для проверки индикатора
+        // testBmiIndicator()
     }
     
     private fun initializeViews() {
@@ -78,15 +81,14 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     private fun applyOptimizedFontSizes() {
         try {
             // Используем ресурсы из dimens.xml для согласованности
-            // Основные значения (вес, ИМТ, калории) - 22sp
             weightTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
             bmiTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
             caloriesTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
             
-            // Имя пользователя - 20sp
+            // Имя пользователя - 18sp
             userNameTextView.textSize = resources.getDimension(R.dimen.text_size_xlarge) / resources.displayMetrics.scaledDensity
             
-            // Категории и пояснения - 12sp (ИЗМЕНЕНО: было 14sp)
+            // Категории и пояснения - 10sp
             bmiCategoryTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
             progressTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
             
@@ -107,12 +109,12 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
             e.printStackTrace()
             
             // Значения по умолчанию
-            weightTextView.textSize = 22f
-            bmiTextView.textSize = 22f
-            caloriesTextView.textSize = 22f
-            userNameTextView.textSize = 20f
-            bmiCategoryTextView.textSize = 12f  // ИЗМЕНЕНО: было 14f
-            progressTextView.textSize = 12f      // ИЗМЕНЕНО: было 14f
+            weightTextView.textSize = 20f
+            bmiTextView.textSize = 20f
+            caloriesTextView.textSize = 20f
+            userNameTextView.textSize = 18f
+            bmiCategoryTextView.textSize = 10f
+            progressTextView.textSize = 10f
             addButton.textSize = 12f
             historyButton.textSize = 12f
             chartButton.textSize = 12f
@@ -255,7 +257,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         bmiScaleContainer.post {
             try {
                 val scaleWidth = bmiScaleContainer.width
-                val indicatorWidth = bmiIndicator.layoutParams.width
+                val indicatorWidth = resources.getDimension(R.dimen.bmi_indicator_width).toInt()
                 
                 // Рассчитываем позицию индикатора
                 var position = (scaleWidth * positionPercent / 100).toInt()
@@ -264,9 +266,12 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                 position = position.coerceIn(0, scaleWidth - indicatorWidth)
                 
                 // Устанавливаем позицию индикатора
-                val layoutParams = bmiIndicator.layoutParams as LinearLayout.LayoutParams
+                val layoutParams = bmiIndicator.layoutParams as RelativeLayout.LayoutParams
                 layoutParams.marginStart = position
                 bmiIndicator.layoutParams = layoutParams
+                
+                // Принудительно перерисовываем
+                bmiIndicator.requestLayout()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -275,19 +280,24 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     
     private fun updateIndicatorColor(bmi: Double) {
         try {
-            val color = when {
-                bmi < 16 -> ContextCompat.getColor(this, R.color.bmi_scale_severe)
-                bmi < 18.5 -> ContextCompat.getColor(this, R.color.bmi_scale_thin)
-                bmi < 25 -> ContextCompat.getColor(this, R.color.bmi_scale_normal)
-                bmi < 30 -> ContextCompat.getColor(this, R.color.bmi_scale_overweight)
-                bmi < 35 -> ContextCompat.getColor(this, R.color.bmi_scale_obesity1)
-                bmi < 40 -> ContextCompat.getColor(this, R.color.bmi_scale_obesity2)
-                else -> ContextCompat.getColor(this, R.color.bmi_scale_obesity3)
-            }
+            val color = HealthCalculations.getBmiIndicatorColor(this, bmi)
             bmiIndicator.setBackgroundColor(color)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+    
+    // Тестовая функция для проверки индикатора (раскомментируйте для теста)
+    private fun testBmiIndicator() {
+        // Устанавливаем тестовый ИМТ
+        val testBmi = 25.0 // Нормальный вес
+        
+        bmiTextView.text = String.format(Locale.getDefault(), "%.1f", testBmi)
+        bmiCategoryTextView.text = "Нормальный вес (тест)"
+        bmiCategoryTextView.setTextColor(HealthCalculations.getBMIColor(this, testBmi))
+        
+        // Обновляем шкалу ИМТ
+        updateBMIScale(testBmi)
     }
     
     private fun showAddWeightDialog() {

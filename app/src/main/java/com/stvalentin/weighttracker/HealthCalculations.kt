@@ -24,13 +24,29 @@ object HealthCalculations {
         }
     }
     
-    // НОВАЯ ФУНКЦИЯ: Получение цвета для ИМТ
+    // УЛУЧШЕННАЯ ФУНКЦИЯ: Получение цвета для ИМТ
     fun getBMIColor(context: Context, bmi: Double): Int {
         return when {
-            bmi < 18.5 -> ContextCompat.getColor(context, android.R.color.holo_orange_light)
-            bmi < 25 -> ContextCompat.getColor(context, android.R.color.holo_green_light)
-            bmi < 30 -> ContextCompat.getColor(context, android.R.color.holo_orange_dark)
-            else -> ContextCompat.getColor(context, android.R.color.holo_red_light)
+            bmi < 16.0 -> ContextCompat.getColor(context, R.color.bmi_scale_severe)
+            bmi < 18.5 -> ContextCompat.getColor(context, R.color.bmi_scale_thin)
+            bmi < 25.0 -> ContextCompat.getColor(context, R.color.bmi_scale_normal)
+            bmi < 30.0 -> ContextCompat.getColor(context, R.color.bmi_scale_overweight)
+            bmi < 35.0 -> ContextCompat.getColor(context, R.color.bmi_scale_obesity1)
+            bmi < 40.0 -> ContextCompat.getColor(context, R.color.bmi_scale_obesity2)
+            else -> ContextCompat.getColor(context, R.color.bmi_scale_obesity3)
+        }
+    }
+    
+    // ФУНКЦИЯ для получения цвета индикатора ИМТ
+    fun getBmiIndicatorColor(context: Context, bmi: Double): Int {
+        return when {
+            bmi < 16.0 -> ContextCompat.getColor(context, R.color.bmi_scale_severe)
+            bmi < 18.5 -> ContextCompat.getColor(context, R.color.bmi_scale_thin)
+            bmi < 25.0 -> ContextCompat.getColor(context, R.color.bmi_scale_normal)
+            bmi < 30.0 -> ContextCompat.getColor(context, R.color.bmi_scale_overweight)
+            bmi < 35.0 -> ContextCompat.getColor(context, R.color.bmi_scale_obesity1)
+            bmi < 40.0 -> ContextCompat.getColor(context, R.color.bmi_scale_obesity2)
+            else -> ContextCompat.getColor(context, R.color.bmi_scale_obesity3)
         }
     }
     

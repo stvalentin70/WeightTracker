@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    
+    <corners android:radius="@dimen/bmi_scale_corner_radius"/>
+    
     <gradient
-        android:startColor="#FF6F00"
-        android:centerColor="#4CAF50"
-        android:endColor="#F44336"
+        android:startColor="@color/bmi_scale_severe"
+        android:centerColor="@color/bmi_scale_normal"
+        android:endColor="@color/bmi_scale_obesity3"
+        android:type="linear"
         android:angle="0"/>
-    <corners android:radius="4dp"/>
+        
 </shape>
