@@ -482,44 +482,65 @@
             android:gravity="center"
             android:layout_marginBottom="@dimen/spacing_large">
 
+            <!-- Кнопка Добавить (БЕЗ ЭМОДЗИ) -->
             <Button
                 android:id="@+id/addButton"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/button_height_small"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="@string/add_weight"
-                android:textSize="@dimen/card_small_text_size"
-                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Добавить"
+                android:textSize="16sp"
+                android:layout_marginEnd="4dp"
                 android:backgroundTint="@color/primary_green"
                 android:textColor="@color/text_white"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"/>
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:minWidth="0dp"
+                android:minHeight="48dp"
+                android:includeFontPadding="false"
+                android:gravity="center"/>
 
+            <!-- Кнопка История -->
             <Button
                 android:id="@+id/historyButton"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/button_height_small"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="@string/view_history"
-                android:textSize="@dimen/card_small_text_size"
-                android:layout_marginHorizontal="@dimen/spacing_small"
+                android:text="📋 История"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="4dp"
                 android:backgroundTint="@color/primary_blue"
                 android:textColor="@color/text_white"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"/>
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:minWidth="0dp"
+                android:minHeight="48dp"
+                android:includeFontPadding="false"
+                android:gravity="center"/>
 
+            <!-- Кнопка График -->
             <Button
                 android:id="@+id/chartButton"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/button_height_small"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="@string/view_chart"
-                android:textSize="@dimen/card_small_text_size"
-                android:layout_marginStart="@dimen/spacing_small"
+                android:text="📈 График"
+                android:textSize="16sp"
+                android:layout_marginStart="4dp"
                 android:backgroundTint="@color/primary_orange"
                 android:textColor="@color/text_white"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"/>
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:minWidth="0dp"
+                android:minHeight="48dp"
+                android:includeFontPadding="false"
+                android:gravity="center"/>
 
         </LinearLayout>
 
@@ -527,23 +548,37 @@
         <Button
             android:id="@+id/settingsButton"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height_small"
-            android:text="@string/view_profile"
-            android:textSize="@dimen/card_small_text_size"
+            android:layout_height="48dp"
+            android:text="👤 Профиль"
+            android:textSize="16sp"
             android:layout_marginBottom="@dimen/spacing_large"
             android:backgroundTint="@color/primary_gray"
-            android:textColor="@color/text_white"/>
+            android:textColor="@color/text_white"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:minHeight="48dp"
+            android:includeFontPadding="false"
+            android:gravity="center"/>
 
         <!-- Кнопка импорта/экспорта -->
         <Button
             android:id="@+id/importButton"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height_small"
+            android:layout_height="48dp"
             android:text="📥 Импорт/Экспорт"
-            android:textSize="@dimen/card_small_text_size"
+            android:textSize="16sp"
             android:layout_marginBottom="@dimen/spacing_xlarge"
             android:backgroundTint="@color/primary_purple"
-            android:textColor="@color/text_white"/>
+            android:textColor="@color/text_white"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:minHeight="48dp"
+            android:includeFontPadding="false"
+            android:gravity="center"/>
 
         <!-- Версия приложения -->
         <TextView

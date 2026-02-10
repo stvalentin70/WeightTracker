@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_enhanced)  // Используем enhanced версию
+        setContentView(R.layout.activity_main_enhanced)
         
         val repository = WeightRepository(WeightDatabase.getDatabase(this).weightDao())
         viewModel = ViewModelProvider(this, WeightViewModel.provideFactory(repository))
@@ -62,9 +62,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         initializeViews()
         setupClickListeners()
         setupObservers()
-        
-        // Убеждаемся, что кнопки имеют правильный текст с эмодзи
-        ensureButtonsHaveEmoji()
     }
     
     private fun initializeViews() {
@@ -85,53 +82,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         // Инициализация элементов шкалы ИМТ
         bmiScaleContainer = findViewById(R.id.bmiScaleContainer)
         bmiIndicator = findViewById(R.id.bmiIndicator)
-        
-        // Устанавливаем оптимизированные размеры шрифтов
-        applyOptimizedFontSizes()
-    }
-    
-    private fun applyOptimizedFontSizes() {
-        try {
-            // Используем ресурсы из dimens.xml для согласованности
-            weightTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
-            bmiTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
-            caloriesTextView.textSize = resources.getDimension(R.dimen.card_value_text_size) / resources.displayMetrics.scaledDensity
-            
-            // Имя пользователя - 18sp
-            userNameTextView.textSize = resources.getDimension(R.dimen.text_size_xlarge) / resources.displayMetrics.scaledDensity
-            
-            // Категории и пояснения - 10sp
-            bmiCategoryTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
-            progressTextView.textSize = resources.getDimension(R.dimen.card_detail_text_size) / resources.displayMetrics.scaledDensity
-            
-        } catch (e: Exception) {
-            // При ошибке используем значения по умолчанию
-            e.printStackTrace()
-            
-            // Значения по умолчанию
-            weightTextView.textSize = 20f
-            bmiTextView.textSize = 20f
-            caloriesTextView.textSize = 20f
-            userNameTextView.textSize = 18f
-            bmiCategoryTextView.textSize = 10f
-            progressTextView.textSize = 10f
-        }
-    }
-    
-    private fun ensureButtonsHaveEmoji() {
-        // Явно устанавливаем тексты с эмодзи (на случай, если strings.xml не загрузился)
-        addButton.text = "➕ Добавить"
-        historyButton.text = "📋 История"
-        chartButton.text = "📈 График"
-        profileButton.text = "👤 Профиль"
-        importButton.text = "📥 Импорт/Экспорт"
-        
-        // Устанавливаем размер шрифта для кнопок
-        addButton.textSize = 12f
-        historyButton.textSize = 12f
-        chartButton.textSize = 12f
-        profileButton.textSize = 12f
-        importButton.textSize = 12f
     }
     
     private fun setupClickListeners() {
@@ -176,16 +126,14 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     
     private fun openFilePickerForImport() {
         try {
-            // Пробуем сначала с ACTION_GET_CONTENT
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "*/*"
                 addCategory(Intent.CATEGORY_OPENABLE)
                 putExtra(Intent.EXTRA_MIME_TYPES, arrayOf(
                     "text/*",
                     "application/*",
-                    "image/*" // Некоторые файловые менеджеры могут требовать это
+                    "image/*"
                 ))
-                // Разрешаем выбирать любые файлы
                 putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
             }
             
@@ -194,7 +142,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         } catch (e: Exception) {
             Log.e(TAG, "Ошибка при открытии файлового менеджера: ${e.message}")
             
-            // Альтернативный вариант
             try {
                 val fallbackIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)
@@ -213,35 +160,18 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
         
         if (requestCode == REQUEST_CODE_IMPORT_CSV && resultCode == RESULT_OK) {
             data?.data?.let { uri ->
-                Log.d(TAG, "Выбран файл: $uri")
-                Log.d(TAG, "Путь файла: ${uri.path}")
-                
-                // Проверяем разрешения
-                try {
-                    contentResolver.takePersistableUriPermission(
-                        uri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                    )
-                } catch (e: Exception) {
-                    Log.w(TAG, "Не удалось получить разрешения для файла: ${e.message}")
-                }
-                
                 importCSVFile(uri)
             } ?: run {
-                Log.e(TAG, "URI файла равен null")
                 Toast.makeText(this, "Ошибка: не выбран файл", Toast.LENGTH_SHORT).show()
             }
         }
     }
     
     private fun importCSVFile(uri: Uri) {
-        Log.d(TAG, "Начинаем импорт файла: $uri")
-        
         lifecycleScope.launch {
             try {
                 val inputStream = contentResolver.openInputStream(uri)
                 if (inputStream == null) {
-                    Log.e(TAG, "Не удалось открыть InputStream для файла")
                     runOnUiThread {
                         Toast.makeText(
                             this@MainActivity,
@@ -254,7 +184,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                 
                 inputStream.use { stream ->
                     val fileInfo = CSVImportUtil.getCSVInfo(stream)
-                    Log.d(TAG, "Информация о файле: $fileInfo")
                     
                     if (fileInfo.validLines == 0) {
                         runOnUiThread {
@@ -267,7 +196,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                         return@launch
                     }
                     
-                    // Показываем диалог подтверждения
                     runOnUiThread {
                         AlertDialog.Builder(this@MainActivity)
                             .setTitle("Подтверждение импорта")
@@ -280,7 +208,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                     }
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Ошибка чтения файла: ${e.message}", e)
                 runOnUiThread {
                     Toast.makeText(
                         this@MainActivity,
@@ -293,15 +220,12 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     }
     
     private fun startImport(uri: Uri) {
-        Log.d(TAG, "Запуск импорта из: $uri")
-        
         lifecycleScope.launch {
             showProgressDialog("Импорт данных...")
             
             try {
                 val inputStream = contentResolver.openInputStream(uri)
                 if (inputStream == null) {
-                    Log.e(TAG, "Не удалось открыть InputStream для импорта")
                     runOnUiThread {
                         hideProgressDialog()
                         Toast.makeText(
@@ -314,17 +238,13 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                 }
                 
                 inputStream.use { stream ->
-                    // Получаем репозиторий для импорта
                     val weightRepository = WeightRepository(WeightDatabase.getDatabase(this@MainActivity).weightDao())
                     
-                    Log.d(TAG, "Начинаем импорт через CSVImportUtil")
                     val (successCount, errorCount) = CSVImportUtil.importFromCSV(
                         this@MainActivity,
                         stream,
                         weightRepository
                     )
-                    
-                    Log.d(TAG, "Импорт завершен: успешно=$successCount, ошибок=$errorCount")
                     
                     runOnUiThread {
                         hideProgressDialog()
@@ -341,16 +261,11 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                             .setMessage(message)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
-                                // Обновляем данные
-                                viewModel.allEntries.value?.let {
-                                    // Данные обновятся через LiveData
-                                }
                             }
                             .show()
                     }
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Ошибка импорта: ${e.message}", e)
                 runOnUiThread {
                     hideProgressDialog()
                     Toast.makeText(
@@ -435,14 +350,13 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                 userNameTextView.text = if (it.name.isNotEmpty()) it.name else "Гость"
                 
                 val currentWeight = viewModel.latestEntry.value?.weight
-                
                 calculateAndDisplayMetrics(it, currentWeight)
             }
         }
     }
     
     private fun calculateAndDisplayMetrics(profile: UserProfile, currentWeight: Double?) {
-        // 1. Расчет ИМТ (если есть текущий вес и рост)
+        // 1. Расчет ИМТ
         if (currentWeight != null && profile.heightCm > 0) {
             val bmi = HealthCalculations.calculateBMI(currentWeight, profile.heightCm)
             val bmiCategory = HealthCalculations.getBMICategory(bmi)
@@ -451,7 +365,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
             bmiCategoryTextView.text = bmiCategory
             bmiCategoryTextView.setTextColor(HealthCalculations.getBMIColor(this, bmi))
             
-            // Обновляем шкалу ИМТ
             updateBMIScale(bmi)
         } else {
             bmiTextView.text = "--"
@@ -459,8 +372,6 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
                 "Введите рост" 
                 else "Добавьте вес"
             bmiCategoryTextView.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
-            
-            // Скрываем индикатор на шкале
             bmiIndicator.visibility = View.GONE
         }
         
@@ -501,20 +412,15 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     
     private fun updateBMIScale(bmi: Double) {
         try {
-            // Показываем индикатор
             bmiIndicator.visibility = View.VISIBLE
             
-            // Рассчитываем позицию индикатора на шкале (0-100%)
             val positionPercent = when {
                 bmi < 16 -> 0f
                 bmi > 40 -> 100f
                 else -> ((bmi - 16) / (40 - 16) * 100).toFloat()
             }
             
-            // Обновляем позицию индикатора
             updateIndicatorPosition(positionPercent)
-            
-            // Обновляем цвет индикатора в зависимости от категории ИМТ
             updateIndicatorColor(bmi)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -522,24 +428,17 @@ class MainActivity : AppCompatActivity(), AddWeightDialogFragment.OnWeightAddedL
     }
     
     private fun updateIndicatorPosition(positionPercent: Float) {
-        // Используем post для получения актуальных размеров после отрисовки
         bmiScaleContainer.post {
             try {
                 val scaleWidth = bmiScaleContainer.width
                 val indicatorWidth = resources.getDimension(R.dimen.bmi_indicator_width).toInt()
                 
-                // Рассчитываем позицию индикатора
                 var position = (scaleWidth * positionPercent / 100).toInt()
-                
-                // Ограничиваем позицию в пределах шкалы
                 position = position.coerceIn(0, scaleWidth - indicatorWidth)
                 
-                // Устанавливаем позицию индикатора
                 val layoutParams = bmiIndicator.layoutParams as RelativeLayout.LayoutParams
                 layoutParams.marginStart = position
                 bmiIndicator.layoutParams = layoutParams
-                
-                // Принудительно перерисовываем
                 bmiIndicator.requestLayout()
             } catch (e: Exception) {
                 e.printStackTrace()

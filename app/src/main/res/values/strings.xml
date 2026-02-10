@@ -11,13 +11,15 @@
     <string name="view_history">📋 История</string>
     <string name="view_chart">📈 График</string>
     <string name="view_profile">👤 Профиль</string>
+    <string name="import_export">📥 Импорт/Экспорт данных</string>
     
     <!-- ИМТ -->
     <string name="bmi_title">ИМТ</string>
     <string name="bmi_scale_title">Шкала ИМТ</string>
     <string name="bmi_normal_range">Норма: 18.5-25</string>
     <string name="bmi_placeholder">--</string>
-    <string name="bmi_enter_data">Введите рост и вес</string>
+    <string name="bmi_enter_data">Введите данные</string>
+    <string name="bmi_enter_height">Введите рост</string>
     <string name="bmi_enter_weight">Добавьте вес</string>
     <string name="bmi_severe_thinness">Выраженный дефицит</string>
     <string name="bmi_thinness">Дефицит веса</string>
