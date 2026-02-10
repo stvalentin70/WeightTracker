@@ -83,7 +83,7 @@
     <dimen name="card_title_text_size">16sp</dimen> <!-- Заголовки карточек -->
     <dimen name="card_value_text_size">20sp</dimen> <!-- ИЗМЕНЕНО: было 22sp -->
     <dimen name="card_detail_text_size">10sp</dimen> <!-- Подзаголовки -->
-    <dimen name="card_small_text_size">12sp</dimen> <!-- Кнопки и мелкий текст -->
+    <dimen name="card_small_text_size">14sp</dimen> <!-- ИЗМЕНЕНО: было 12sp -->
     <dimen name="card_subtitle_text_size">16sp</dimen>
     
     <!-- Размеры для шкалы ИМТ -->
@@ -91,8 +91,8 @@
     <dimen name="bmi_scale_corner_radius">4dp</dimen>
     <dimen name="bmi_indicator_width">3dp</dimen>
     <dimen name="bmi_indicator_height">24dp</dimen>
-    <dimen name="bmi_label_text_size">10sp</dimen>
-    <dimen name="bmi_legend_text_size">12sp</dimen>
+    <dimen name="bmi_label_text_size">12sp</dimen> <!-- ИЗМЕНЕНО: было 10sp -->
+    <dimen name="bmi_legend_text_size">14sp</dimen> <!-- ИЗМЕНЕНО: было 12sp -->
     
     <!-- Отступы между элементами -->
     <dimen name="spacing_xsmall">4dp</dimen>
