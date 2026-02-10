@@ -8,7 +8,7 @@
     <dimen name="padding_xxlarge">32dp</dimen>
     
     <!-- Отступы для карточек -->
-    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_padding">12dp</dimen> <!-- ИЗМЕНЕНО: было 16dp -->
     <dimen name="card_padding_large">20dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_margin_large">16dp</dimen>
@@ -74,15 +74,15 @@
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
-    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_xlarge">18sp</dimen> <!-- ИЗМЕНЕНО: было 20sp -->
     <dimen name="text_size_xxlarge">22sp</dimen>
     <dimen name="text_size_xxxlarge">24sp</dimen>
     <dimen name="text_size_display">32sp</dimen>
     
     <!-- Специальные размеры для карточек на главном экране (ИСПРАВЛЕНЫ) -->
     <dimen name="card_title_text_size">16sp</dimen> <!-- Заголовки карточек -->
-    <dimen name="card_value_text_size">22sp</dimen> <!-- Основные значения -->
-    <dimen name="card_detail_text_size">10sp</dimen> <!-- ИЗМЕНЕНО: было 14sp -->
+    <dimen name="card_value_text_size">20sp</dimen> <!-- ИЗМЕНЕНО: было 22sp -->
+    <dimen name="card_detail_text_size">10sp</dimen> <!-- Подзаголовки -->
     <dimen name="card_small_text_size">12sp</dimen> <!-- Кнопки и мелкий текст -->
     <dimen name="card_subtitle_text_size">16sp</dimen>
     
@@ -92,13 +92,13 @@
     <dimen name="bmi_indicator_width">3dp</dimen>
     <dimen name="bmi_indicator_height">24dp</dimen>
     <dimen name="bmi_label_text_size">10sp</dimen>
-    <dimen name="bmi_legend_text_size">12sp</dimen> <!-- ИЗМЕНЕНО: было 9sp -->
+    <dimen name="bmi_legend_text_size">12sp</dimen>
     
     <!-- Отступы между элементами -->
     <dimen name="spacing_xsmall">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">12dp</dimen>
-    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_large">12dp</dimen> <!-- ИЗМЕНЕНО: было 16dp -->
     <dimen name="spacing_xlarge">20dp</dimen>
     <dimen name="spacing_xxlarge">24dp</dimen>
     <dimen name="spacing_xxxlarge">32dp</dimen>
